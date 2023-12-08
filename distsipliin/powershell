@@ -1,0 +1,14 @@
+Function saaruntime ($argument) {
+ $process = Get-Process -Name $argument
+
+# Check if the process exists
+if ($process) {
+    # Get the total runtime of the process
+    $runtime = (Get-Date) - $process.StartTime
+    Write-Output "Process '$($process.Name)' has been running for: $runtime"
+} else {
+    Write-Output "Process not found."
+}
+}
+$result = saaruntime Discord
+Write-Host "The result is: $result"
