@@ -1,16 +1,30 @@
-import subprocess
+import os
+import winreg
 
-def get_installed_applications():
+def list_installed_programs():
     try:
-        result = subprocess.check_output(["wmic", "product", "get", "name"])
-        applications = result.decode("utf-8").split('\n')[1:-1]
-        return applications
-    except subprocess.CalledProcessError as e:
-        print(f"Error: {e}")
-        return None
+        # Open the registry key containing information about installed programs
+        key_path = r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path, 0, winreg.KEY_READ | winreg.KEY_WOW64_32KEY)
 
-installed_apps = get_installed_applications()
-if installed_apps:
-    print("Installed Applications:")
-    for app in installed_apps:
-        print(app.strip())
+        # Iterate through subkeys and retrieve program names
+        print("List of Installed Programs:")
+        for i in range(winreg.QueryInfoKey(key)[0]):
+            subkey_name = winreg.EnumKey(key, i)
+            subkey_path = os.path.join(key_path, subkey_name)
+            subkey = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, subkey_path)
+            
+            try:
+                program_name = winreg.QueryValueEx(subkey, "DisplayName")[0]
+                print(program_name)
+            except FileNotFoundError:
+                # Some subkeys may not have DisplayName, ignore them
+                pass
+
+            winreg.CloseKey(subkey)
+
+    except Exception as e:
+        print(f"Error: {e}")
+
+if __name__ == "__main__":
+    list_installed_programs()

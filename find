@@ -1,0 +1,9 @@
+# Get a list of installed programs using Win32_Product
+$installedPrograms = Get-WmiObject -Class Win32_Product | Select-Object Name
+
+# Get a list of programs from Start Menu shortcuts
+$startMenuPrograms = Get-ChildItem "$env:APPDATA\Microsoft\Windows\Start Menu\Programs" -Recurse | Where-Object { $_.Extension -eq ".lnk" } | ForEach-Object { $_.BaseName }
+
+# Combine and print the list of installed programs
+$allPrograms = $installedPrograms + $startMenuPrograms
+$allPrograms | Sort-Object -Unique | ForEach-Object { Write-Output $_ }
