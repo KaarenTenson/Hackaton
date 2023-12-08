@@ -32,4 +32,3 @@ def open_application(application_name):
         print(f"Error: {e}")
 
 open_application("")
-
