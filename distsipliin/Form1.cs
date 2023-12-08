@@ -20,6 +20,7 @@ namespace distsipliin
             label3.Text = timer.ToString();
         }
 
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if (textBox1.Text=="t"){
