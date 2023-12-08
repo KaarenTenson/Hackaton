@@ -1,5 +1,5 @@
 Function saaruntime ($argument) {
- $process = Get-Process -Name $argument
+ $process = Get-Process -Name $argument|Sort-Object StartTime -Descending | Select-Object -First 1  
 
 # Check if the process exists
 if ($process) {
