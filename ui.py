@@ -74,6 +74,50 @@ class Ui_MainWindow(object):
         self.actionAddGoodProgram.setText(_translate("MainWindow", "Lisa hea programm"))
         self.actionAddBadProgram.setText(_translate("MainWindow", "Lisa halb programm"))
 
+    def button_clicked(self):
+        self.new_window = QtWidgets.QMainWindow()
+        self.new_window.setWindowTitle("Programmi seadmed")
+        self.new_window.resize(280, 250)
+
+        # Create a central widget for the new window
+        central_widget = QtWidgets.QWidget(self.new_window)
+        self.new_window.setCentralWidget(central_widget)
+
+        # Create a layout for the central widget
+        layout = QtWidgets.QVBoxLayout(central_widget)
+
+        # Add labels and widgets to the layout
+        label_programmid = QtWidgets.QLabel("Programmid:")
+        dropdown_options = QtWidgets.QComboBox()
+        # Add options to the dropdown
+        dropdown_options.addItems(["Minecraft", "Microsoft Word", "Steam", "Fortnite", "GitHub Desktop", "Spotify", "Cookie Clicker"])
+
+        label_piirang = QtWidgets.QLabel("Piirang tundides (max 24h):")
+        time_edit = QtWidgets.QTimeEdit()
+
+        # Add an image drag and drop layer
+        image_layer = QtWidgets.QLabel("Drag and drop image here")
+
+        # Add the labels and widgets to the layout
+        layout.addWidget(label_programmid)
+        layout.addWidget(dropdown_options)
+        layout.addWidget(label_piirang)
+        layout.addWidget(time_edit)
+        layout.addWidget(image_layer)
+
+        save_button = QtWidgets.QPushButton("Salvesta")
+        save_button.clicked.connect(self.save_button_clicked)
+        layout.addWidget(save_button)
+
+        # Set the layout for the central widget
+        central_widget.setLayout(layout)
+
+        # Show the new window
+        self.new_window.show()
+
+    def save_button_clicked(self):
+        self.new_window.close()
+
     def hea_valitud(self):
         if not hasattr(self, 'hea_valitud_count'):
             self.hea_valitud_count = 0
@@ -110,12 +154,18 @@ class Ui_MainWindow(object):
         else:
             print("Halb_valitud can't be used more than 3 times.")
 
+    def connect_buttons(self):
+        for attr in dir(self):
+            if isinstance(getattr(self, attr), QtWidgets.QPushButton):
+                getattr(self, attr).clicked.connect(self.button_clicked)
+
 def start_ui():   
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
+    ui.connect_buttons()
     MainWindow.show()
     sys.exit(app.exec_())
 
