@@ -13,7 +13,7 @@ def get_running_processes():
             if line:
                 name = line.strip()
                 processes_list.append(name)
-
+        print(processes_list)
         return processes_list
     except Exception as e:
         print(f"Error: {e}")
