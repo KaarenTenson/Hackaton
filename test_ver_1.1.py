@@ -1,7 +1,12 @@
 import subprocess
 import os
+import threading
 import time
 
+global heaaeg
+heaaeg=0
+global halbaeg
+halbaeg=0
 base_names = []
 all_installed_apps = ['Brackets.app', 'Microsoft Teams classic.app', 'Visual Studio Code.app', 'Steam.app',
                       'Google Chrome.app', 'Numbers.app', 'Sleep Alarm Clock.app', 'Notion.app', 'Day One.app',
@@ -54,8 +59,6 @@ protsessidklassid = []
 
 
 def tee(protsessid):
-    heaaeg = 0
-    halbaeg = 0
     while True:
         time.sleep(60)
         currently_running_apps = list(set(base_names_with_extensions) & set(all_installed_apps))
@@ -91,4 +94,5 @@ currently_not_running_apps = list(set(all_installed_apps) - set(currently_runnin
 print("Currently not running apps:")
 print(currently_not_running_apps)
 
-tee([protsessid('GlobalProtect.app', "hea"),protsessid('Microsoft Teams classic.app', "halb")])
+background_thread = threading.Thread(target=tee([protsessid('GlobalProtect.app', "hea"),protsessid('Microsoft Teams classic.app', "halb")]))
+background_thread.start()
