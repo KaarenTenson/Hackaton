@@ -1,4 +1,6 @@
 import os
+
+
 def get_installed_applications():
     try:
         applications_directory = "/Applications"
@@ -9,8 +11,9 @@ def get_installed_applications():
         print(f"Error: {e}")
         return None
 
-installed_apps = get_installed_applications()
-if installed_apps:
-    print("Installed Applications:")
-    for app in installed_apps:
-        print(app)
+if __name__ == "__main__":
+    installed_apps = get_installed_applications()
+    if installed_apps:
+        print("Installed Applications:")
+        for app in installed_apps:
+            print(app)
