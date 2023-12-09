@@ -2,19 +2,16 @@ import subprocess
 import os
 import threading
 import time
-
+import close_all_applications
+import distracto_MAC
 global heaaeg
 heaaeg=0
 global halbaeg
 halbaeg=0
+global protsessidlist
+protsessidlist=[]
 base_names = []
-all_installed_apps = ['Brackets.app', 'Microsoft Teams classic.app', 'Visual Studio Code.app', 'Steam.app',
-                      'Google Chrome.app', 'Numbers.app', 'Sleep Alarm Clock.app', 'Notion.app', 'Day One.app',
-                      'OneDrive.app', 'Spotify.app', 'PyCharm.app', 'iMovie.app', 'Microsoft Word.app', 'Zulip.app',
-                      'EdrawMind.app', 'Safari.app', 'Kindle.app', 'Microsoft Excel.app', 'Utilities', 'zoom.us.app',
-                      'Python 3.11', 'Microsoft Outlook.app', 'Roblox.app', 'Keynote.app', 'Pages.app',
-                      'GarageBand.app', 'Kivy.app', 'Microsoft OneNote.app', 'GlobalProtect.app', 'Messenger.app',
-                      'Final Video Player.app', 'Thonny.app', 'CrystalFetch.app', 'OBS.app', 'Microsoft PowerPoint.app']
+all_installed_apps = distracto_MAC.saalist()
 
 
 class protsessid:
@@ -66,10 +63,14 @@ def tee(protsessid):
         for el in protsessid:
             if el.nimi in currently_running_apps:
                 if el.hea == "halb":
-                    halbaeg += 1
-                    print(halbaeg)
+                    if halbaeg<=0:
+                        close_all_applications.close_application(el.nimi)
+                    else:
+                        halbaeg -= 1
+                        print(halbaeg)
                 else:
                     heaaeg += 1
+                    halbaeg+=1
                     print(heaaeg)
 
 if __name__ == "__main__":

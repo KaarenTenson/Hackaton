@@ -11,17 +11,17 @@ def get_installed_applications():
     except Exception as e:
         print(f"Error: {e}")
         return None
+def saalist():  
+    app_count = 0
+    installed_apps_array = list()
+    installed_apps = get_installed_applications()
+    if installed_apps:
+        for app in installed_apps:
+            installed_apps_array.append(app)
+            app_count += 1
 
-app_count = 0
-installed_apps_array = list()
-installed_apps = get_installed_applications()
-if installed_apps:
-    for app in installed_apps:
-        installed_apps_array.append(app)
-        app_count += 1
-
-print("There are "+str(app_count)+" apps installed on your computer.\nYour installed apps are:")
-print(installed_apps_array)
+    print("There are "+str(app_count)+" apps installed on your computer.\nYour installed apps are:")
+    print(installed_apps_array)
 
 # FUNCTION FOR OPENING APPS
 def open_application(application_name):
