@@ -1,0 +1,10 @@
+C:\Users\kasutaja\source\repos\distsipliin\distsipliin\bin\Debug\distsipliin.exe.config
+C:\Users\kasutaja\source\repos\distsipliin\distsipliin\bin\Debug\distsipliin.exe
+C:\Users\kasutaja\source\repos\distsipliin\distsipliin\bin\Debug\distsipliin.pdb
+C:\Users\kasutaja\source\repos\distsipliin\distsipliin\obj\Debug\distsipliin.csproj.AssemblyReference.cache
+C:\Users\kasutaja\source\repos\distsipliin\distsipliin\obj\Debug\distsipliin.Form1.resources
+C:\Users\kasutaja\source\repos\distsipliin\distsipliin\obj\Debug\distsipliin.Properties.Resources.resources
+C:\Users\kasutaja\source\repos\distsipliin\distsipliin\obj\Debug\distsipliin.csproj.GenerateResource.cache
+C:\Users\kasutaja\source\repos\distsipliin\distsipliin\obj\Debug\distsipliin.csproj.CoreCompileInputs.cache
+C:\Users\kasutaja\source\repos\distsipliin\distsipliin\obj\Debug\distsipliin.exe
+C:\Users\kasutaja\source\repos\distsipliin\distsipliin\obj\Debug\distsipliin.pdb
